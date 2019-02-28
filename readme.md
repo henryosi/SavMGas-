@@ -26,7 +26,7 @@ SavMGas
 
 # Google OAuth is used for authentication and to maintain the rider information in session.
 
-The Later phase of the project will update
+# The Later phase of the project will update
 
 ![alt text](./public/images/one1.png "Logo Title Text 1")
 
@@ -40,4 +40,4 @@ The Later phase of the project will update
 - latitude
 - longitide
 
-#Finally, The app will allow drivers to preset their schedule
+# Finally, The app will allow drivers to preset their schedule
