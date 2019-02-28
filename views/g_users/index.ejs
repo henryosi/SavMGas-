@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8"/>
+    <title>User <%= name %> </title>
+     <!-- Google Icon Fonts used by Materialize -->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Materialize CSS Framework -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <!-- JavaScript for Materialize -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body data-name="<%= name %>">
+    <h1>Welcome <%= name %></h1>
+    <h4 id="notification"> 
+        <!-- Some info will be displayed here-->
+    </h4>
+    <div class="navbar-fixed">
+        <nav>
+          <div class="nav-wrapper">
+            <a href="" class="brand-logo left">User Portal</a>
+            <ul class="right">
+              <li>
+                <% if (user) { %>
+                    <a href="/logout"><i class="material-icons left">trending_flat</i>Log Out</a>
+                <% } %>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="container">
+        <div id="search-row" class="row">
+          <h2 class="col s4 blue-grey-text text-darken-2"></h2>
+          <form action="/drivers" method="GET">
+            <div class="col s3 offset-s3">
+          </form>
+        </div>
+        <div class="row">
+            <% if(g_user) { %>
+          <div id="students" class="col s12">
+              <div class="card blue-grey">
+                <div class="card-content white-text">
+                  <div>
+                    <span class="card-title">
+                      <% if (g_user.avatar) { %>
+                        <img src="<%= g_user.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
+                      <% } else { %>
+                        <i class="small material-icons">perm_identity</i>
+                      <% } %>
+                      <span class="student-name"><%= g_user.name %></span>
+                      <% if (g_user.cohort) { %>
+                        <span class="badge white">WDI <%= g_user.cohort %></span>
+                      <% } %>
+                    </span>
+                  </div>
+                  <ul class="collection">
+                      <% g_user.pickup.forEach(function(pickup) { %>
+                      <li class="collection-item blue-grey-text text-darken-2">
+                        <!-- Add delete form - don't forget to install method-override & change user._id-->
+                        <span class="title"><%- pickup.text %></span>
+                        <% if (g_user._id.equals(user && user._id)) { %>
+                          <form action="g_users/pickups/<%= pickup._id %>?_method=DELETE" method="POST" class="secondary-content">
+                            <button type="submit" class="btn-small red-text">X</button>
+                          </form>
+                        <% } %>
+                      </li>
+                      <% }) %>
+                  </ul>
+                  <% if (g_user._id.equals(user && user._id)) { %>
+                    <div class="card-action">
+                      <form action="g_users/pickups" method="POST">
+                        <input type="text" name="text" class="white-text">
+                        <button type="submit" class="btn white-text">Accept Pickup</button>
+                      </form>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+              <% } %>
+          </div>
+        </div>
+      </div>
+    <div id="map"> 
+        <!-- We will load a map here later-->
+    </div>
+    <!--Load JavaScripts -->
+</body>
+</html>
+
+
+ 
+
