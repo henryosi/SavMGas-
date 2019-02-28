@@ -28,7 +28,7 @@ The third phase will
 
 The Later phase of the project will update
 
-![alt text](./images/one1.png "Logo Title Text 1")
+![alt text](./public/images/one1.png "Logo Title Text 1")
 
 ##Driver Registration:
 Driver ID
