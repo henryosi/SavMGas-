@@ -6,12 +6,53 @@ var Client = require('../models/client');
 var Ride = require('../models/ride');
 
 module.exports = {
+    share,
+    shareExperience,
+    removeExperience,
     index,
     signUp,
     updateUserLocation,
     checkFCM,
     // rejectPickup
 };
+
+
+function share(req, res, next) {
+    console.log(req.query)
+    // Make the query object to use with Student.find based up
+    // the user has submitted the search form or now
+    let modelQuery = req.query.name ? {name: new RegExp(req.query.name, 'i')} : {};
+    // Default to sorting by name
+    let sortKey = req.query.sort || 'name';
+    G_User.find(modelQuery)
+    .sort(sortKey).exec(function(err, g_users) {
+      if (err) return next(err);
+      // Passing search values, name & sortKey, for use in the EJS
+      res.render('g_users/ninjas', {
+        g_users,
+        user: req.user,
+        name: req.query.name,
+        sortKey
+      });
+    });
+  }
+  
+  function shareExperience(req, res, next) {
+    req.user.experience.push(req.body);
+    req.user.save(function(err) {
+      res.redirect('/g_users/index');
+    });
+  }
+  
+  function removeExperience(req, res, next) {
+    G_User.findOne({'experience._id': req.params.id}, function(err, g_user) {
+      g_user.experience.id(req.params.id).remove();
+      g_user.save(function(err) {
+        res.redirect('/g_users/index');
+      });
+    });
+  }
+  
 
 function index (req, res){
     let modelQuery = req.query.name ? {name: new RegExp(req.query.name, 'i')} : {};

@@ -26,6 +26,9 @@
                     <a href="/logout"><i class="material-icons left">trending_flat</i>Log Out</a>
                 <% } %>
               </li>
+              <li>
+                  <a href="/g_users/share"><i class="material-icons left">trending_flat</i>See Ride Ninjas Experience</a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -56,12 +59,12 @@
                     </span>
                   </div>
                   <ul class="collection">
-                      <% g_user.pickup.forEach(function(pickup) { %>
+                      <% g_user.experience.forEach(function(e) { %>
                       <li class="collection-item blue-grey-text text-darken-2">
                         <!-- Add delete form - don't forget to install method-override & change user._id-->
-                        <span class="title"><%- pickup.text %></span>
+                        <span class="title"><%-e.text %></span>
                         <% if (g_user._id.equals(user && user._id)) { %>
-                          <form action="g_users/pickups/<%= pickup._id %>?_method=DELETE" method="POST" class="secondary-content">
+                          <form action="/g_users/experience/<%= e._id %>?_method=DELETE" method="POST" class="secondary-content">
                             <button type="submit" class="btn-small red-text">X</button>
                           </form>
                         <% } %>
@@ -70,9 +73,9 @@
                   </ul>
                   <% if (g_user._id.equals(user && user._id)) { %>
                     <div class="card-action">
-                      <form action="g_users/pickups" method="POST">
+                      <form action="/g_users/experience" method="POST">
                         <input type="text" name="text" class="white-text">
-                        <button type="submit" class="btn white-text">Accept Pickup</button>
+                        <button type="submit" class="btn white-text">Share Experence</button>
                       </form>
                     </div>
                   <% } %>

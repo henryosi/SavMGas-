@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var pickupSchema = new mongoose.Schema({
+var experienceSchema = new mongoose.Schema({
     text:String
 
 });
@@ -13,7 +13,7 @@ var G_UserSchema = new mongoose.Schema({
     reg_id: String,
     avatar: String,
     googleId: String,
-    pickup: [pickupSchema],
+    experience: [experienceSchema],
 
     rides: {
         type: mongoose.Schema.Types.ObjectId,
