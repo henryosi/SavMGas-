@@ -10,6 +10,7 @@ module.exports = {
     shareExperience,
     removeExperience,
     index,
+    edit,
     signUp,
     updateUserLocation,
     checkFCM,
@@ -68,6 +69,13 @@ function index (req, res){
   });
 }
 
+
+function edit(req, res) {
+    res.render('g_users/edit', {
+      g_u: Todo.getOne(req.params.id),
+      idx: req.params.id
+    });
+  }
 function signUp (req, res){
 
     var data = {
